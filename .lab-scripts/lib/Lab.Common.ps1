@@ -27,7 +27,12 @@ $Global:LabDefaultPublisherPrefix = "lab"
 # lifecycle. Running the image directly (this repo's LOCAL-DRY-RUN.md, CI) never triggers it, so
 # every checkpoint has to assert the same PATH precedence itself, in its own process, rather than
 # relying on a single earlier checkpoint (or the devcontainer) having already done it.
-$env:PATH = "$HOME/.dotnet/tools:$env:PATH"
+$env:PATH = "$HOME/.dotnet/tools$([IO.Path]::PathSeparator)$env:PATH"
+
+# Codespaces injects a GITHUB_TOKEN into every terminal, and gh prefers it over your own login.
+# Once you've signed in with lab-signin.ps1, use your login instead.
+$injectedToken = $env:GITHUB_TOKEN; $env:GITHUB_TOKEN = $null
+if ($injectedToken -and -not (gh auth token 2>$null)) { $env:GITHUB_TOKEN = $injectedToken }
 
 # ── Logging ────────────────────────────────────────────────────────────────────────────────
 function Write-Step  { param([string]$m) Write-Host "`n── $m ──" -ForegroundColor Cyan }
@@ -144,6 +149,16 @@ function Save-Checkpoint {
         $prBody = if ([string]::IsNullOrWhiteSpace($Body)) { "## Summary`n$Message" } else { $Body }
         $url = gh pr create -R $forkRepo --base main --head $Id --title "$Id`: $Message" --body $prBody 2>&1
         if ($url -match 'github.com') { Write-Ok "PR opened: $url" } else { Write-Err "PR failed: $url"; exit 1 }
+        if ([Console]::IsInputRedirected -and -not $env:LAB_AUTO_MERGE) {
+            # No terminal (e.g. an agent runs this): a person reviews and merges on GitHub.
+            Write-Info "Review and merge the PR on GitHub: $url"
+            while (($state = gh pr view $Id -R $forkRepo --json state -q .state) -eq 'OPEN') { Start-Sleep 15 }
+            if ($state -ne 'MERGED') { Write-Err "PR was closed without merging"; exit 1 }
+            git switch main --quiet; git pull --quiet
+            git tag -f $Id 2>&1 | Out-Null; git push -f origin $Id --quiet 2>&1 | Out-Null
+            Write-Ok "Merged + tagged $Id (rollback: git reset --hard $Id)"
+            return
+        }
         if (-not $env:LAB_AUTO_MERGE) { Read-Host "`n  Open the PR link above in your browser, review the diff, then press Enter to merge" }
         Write-Info "Waiting for build checks..."
         gh pr checks $Id -R $forkRepo --watch

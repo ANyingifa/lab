@@ -24,10 +24,14 @@ environments, trunk-based development, PR quality gates and GitHub Actions deplo
 
 ### Signing in (CP01)
 
-`CP01` signs you in to everything up front: **GitHub** (`gh`), **Power Platform** (`txc`) and
-**Azure** (`az`). Two of these use a **device code** — the terminal prints a code and a URL;
-open it, paste the code, and approve. When prompted, allow the `workflow` scope for `gh` so
-later checkpoints can install GitHub Actions on your fork.
+`CP01` signs you in to everything up front: **GitHub** (`gh`), **Power Platform** (`txc`),
+**Azure** (`az`) and **Power Apps** (`pa`). On your own computer a browser window opens; in
+Codespaces you get a **code** instead — open the printed link, enter the code, and approve.
+When prompted, allow the `workflow` scope for `gh` so later checkpoints can install GitHub
+Actions on your fork. Use the same account for Power Platform, Azure and Power Apps.
+
+To sign in again later (new Codespace, expired sign-in), run `.lab-scripts/lab-signin.ps1`, or
+ask Copilot Chat to *sign me in* and it walks you through each step.
 
 ## How each checkpoint works (PR flow)
 
@@ -93,7 +97,7 @@ To pick up the lab on a fresh Codespace, VM, or after a crash:
    `.lab-state.json` and git tags, and whether this machine's own `gh`/`txc`/`az` sessions
    actually match what lab-state expects (a mismatch here is the most common reason a
    checkpoint fails partway through instead of at the top with a clear message).
-4. Re-run CP01 if `lab-status.ps1` flags missing/mismatched auth, then continue with
+4. Run `.lab-scripts/lab-signin.ps1` if `lab-status.ps1` flags missing/mismatched auth, then continue with
    whichever checkpoint it names as next.
 
 ## Developing this lab

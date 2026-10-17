@@ -74,13 +74,13 @@ Write-Host "`n── Live auth (this machine) ──" -ForegroundColor Cyan
 
 $ghUser = $null
 try { $ghUser = (gh api user -q .login 2>$null) } catch { $ghUser = $null }
-if ($ghUser) { Write-Ok "gh: signed in as $ghUser" } else { Write-Warn2 "gh: not signed in (or gh unavailable) — run CP01" }
+if ($ghUser) { Write-Ok "gh: signed in as $ghUser" } else { Write-Warn2 "gh: not signed in (or gh unavailable) — run lab-signin.ps1" }
 
 $txcAuth = Get-LabValue 'txcAuth'
 if ($txcAuth) {
     $liveTxcAuth = $null
     try { $liveTxcAuth = (txc config auth list --format json 2>$null | ConvertFrom-Json -ErrorAction Stop | Where-Object { $_.id -eq $txcAuth } | Select-Object -First 1) } catch { $liveTxcAuth = $null }
-    if ($liveTxcAuth) { Write-Ok "txc: auth '$txcAuth' present" } else { Write-Warn2 "txc: lab-state auth '$txcAuth' NOT found locally (or txc unavailable) — run CP01 again" }
+    if ($liveTxcAuth) { Write-Ok "txc: auth '$txcAuth' present" } else { Write-Warn2 "txc: lab-state auth '$txcAuth' NOT found locally (or txc unavailable) — run lab-signin.ps1" }
 } else {
     Write-Info "txc: no auth recorded in lab-state yet"
 }
@@ -91,7 +91,7 @@ if ($tenantId) {
     try { $liveTenantId = (az account show --query tenantId -o tsv 2>$null) } catch { $liveTenantId = $null }
     if ($liveTenantId -eq $tenantId) { Write-Ok "az: tenant matches ($tenantId)" }
     elseif ($liveTenantId) { Write-Warn2 "az: signed in to a DIFFERENT tenant ($liveTenantId) than lab-state expects ($tenantId)" }
-    else { Write-Warn2 "az: not signed in (or az unavailable) — run CP01 again" }
+    else { Write-Warn2 "az: not signed in (or az unavailable) — run lab-signin.ps1" }
 } else {
     Write-Info "az: no tenant recorded in lab-state yet"
 }

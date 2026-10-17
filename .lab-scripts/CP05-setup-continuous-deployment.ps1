@@ -39,7 +39,7 @@ if ($env:LAB_LOCAL_MODE) {
 $tenantId = Get-LabValue 'tenantId'
 if (-not $tenantId) {
     $tenantId = az account show --query tenantId -o tsv 2>$null
-    if (-not $tenantId) { Write-Err "Not signed in to Azure — run CP01 first"; exit 1 }
+    if (-not $tenantId) { Write-Err "Not signed in to Azure — run .lab-scripts/lab-signin.ps1"; exit 1 }
     Set-LabValue 'tenantId' $tenantId
 }
 Write-Ok "Azure: tenant $tenantId"
