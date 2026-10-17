@@ -25,7 +25,7 @@ Set-LabValue 'repo' $repo
 
 $id = Get-LabValue 'mainRulesetId'
 if (-not $id) {
-    $rulesetName = Get-LabValue 'mainRulesetName' 'alm-lab-main-protection'
+    $rulesetName = Get-LabValue 'mainRulesetName' 'lab-main-protection'
     $id = gh api "repos/$repo/rulesets" -q ".[] | select(.name==`"$rulesetName`") | .id"
     if ($id) { Set-LabValue 'mainRulesetId' $id }
 }

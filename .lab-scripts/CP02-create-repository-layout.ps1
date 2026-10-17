@@ -31,8 +31,8 @@ Push-Location $LabRoot
 try {
     $solutionName = "WarehouseManagement"
     Set-LabValue 'slnxName'       $solutionName
-    Set-LabValue 'publisherName'   "ALMLab"
-    Set-LabValue 'publisherPrefix' "almlab"
+    Set-LabValue 'publisherName'   $LabDefaultPublisherName
+    Set-LabValue 'publisherPrefix' $LabDefaultPublisherPrefix
 
     # Step 1: NuGet feed (TALXIS DevKit build SDK + templates come from nuget.org)
     Copy-Item "$PSScriptRoot/workflows/NuGet.config" "NuGet.config" -Force
