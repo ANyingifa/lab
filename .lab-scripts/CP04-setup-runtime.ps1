@@ -109,6 +109,10 @@ foreach ($key in $envs.Keys) {
     if ($connection.organizationId) { Set-LabValue "${key}OrgId" $connection.organizationId }
     Set-LabValue "${key}Profile" $key
     Write-Ok "$key ready: $url"
+
+    # Code apps are off by default; the Warehouse Picking code app won't run without them.
+    txc env setting set PowerApps_AllowCodeApps true --profile $key 2>&1 | Out-Null
+    if ($LASTEXITCODE -ne 0) { Write-Err "Failed to enable code apps on $key"; exit 1 }
 }
 
 # Pin the dev profile as default for local deploys.
@@ -123,6 +127,7 @@ Create dedicated Dev and Test Dataverse sandboxes so the warehouse app can be bu
 ## Changes
 - provision Dev and Test sandbox environments with unique domains
 - create txc connections and profiles for both environments
+- enable code apps on both (off by default, needed by the Warehouse Picking app)
 - select the dev profile as the default local deployment target
 ## Testing
 - environment provisioning completes and txc can target the dev profile locally
