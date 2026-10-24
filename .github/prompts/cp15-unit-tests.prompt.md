@@ -1,0 +1,21 @@
+---
+agent: agent
+description: CP15 - implement unit tests (Lab 5, parts A and B)
+---
+
+Please implement parts A and B of docs/design/lab-5-testing.md using the TALXIS
+skills: unit tests for the two plugins with FakeXrmEasy, and Jest tests for the form
+and ribbon scripts.
+
+Work under src/ and the solution file. Name the projects however you like, but keep
+the table, column and choice names exactly as the spec has them.
+
+Test the behavior the spec describes, including the Inbound and Outbound cases, and
+run the tests with `dotnet test` and `npm test` before you finish. They shouldn't
+need a Dataverse environment.
+
+If you get stuck, .lab-scripts/CP15-implement-unit-tests.ps1 does this same step
+and is a good example to read.
+
+When you're done, run `.lab-scripts/lab-check.ps1 -Checkpoint cp15` and work through
+anything it reports. Once it passes, tell me to run `lab save`.
