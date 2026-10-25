@@ -11,6 +11,9 @@ A hands-on Power Platform ALM lab: attendees run the checkpoint scripts in `.lab
 - When a script prints a PR link, give it to the person with the three clicks (Files changed,
   Merge pull request, Confirm) and wait. Never merge it yourself.
 - `.lab-scripts/lab-status.ps1` shows where the lab left off.
+- To run a checkpoint, run its script from `.lab-scripts/`; `lab-status.ps1` says which is next. Pass on
+  any link or code it prints, and wait for the person.
+- CP10 and CP12 ask for a key press. Run them with `LAB_AUTO=1` so they don't wait.
 - Read `.lab-scripts/` as working examples, but don't edit it.
 - Use the `txc` discovery commands to scaffold, not `dotnet new`.
 - Ignore the build warning that PDPackage targets aren't verified against the .NET SDK.
