@@ -3,7 +3,7 @@ agent: agent
 description: CP12 - move configuration data as source (Lab 1, reference data)
 ---
 
-Please implement the reference data from docs/design/lab-1-data-model-and-security.md
+Please implement the reference data from docs/design/lab-1-data-model.md
 (the Reference data section) as a Configuration Migration package, using the TALXIS
 skills, so the records travel with the app instead of being typed into each environment.
 

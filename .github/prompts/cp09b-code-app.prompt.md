@@ -1,11 +1,11 @@
 ---
 agent: agent
-description: CP09b - implement the Warehouse Picking code app (Lab 3)
+description: CP09b - implement the Warehouse Picking code app (Lab 4)
 ---
 
-Please implement the Warehouse Picking code app from docs/design/lab-3-user-interface.md,
+Please implement the Warehouse Picking code app from docs/design/lab-4-user-interface.md,
 using the TALXIS skills. That's user stories US-06 to US-12 and the technical
-specification sections "Warehouse Picking code app" and "Test-hook contract".
+specification section "Warehouse Picking code app".
 
 Start from the `pp-app-code` starter. It comes with Fluent UI and the TALXIS base controls,
 so use those for the lists, lookups and form fields. Then add the warehouse screens
@@ -17,8 +17,7 @@ from the spec matter here:
 - All data goes through the generated services, with no hand-written calls to Dataverse.
 - The app only checks that required fields are filled. It never compares stock itself.
 - Server errors are shown with the server's message unchanged.
-- The test hooks in the spec's Test-hook contract go on the elements it names, exactly as
-  listed, whatever controls you use. The barcode scan comes later, so don't build it now.
+- The barcode scan comes later, so don't build it now.
 
 You can add extra screens, like a home screen with quick actions, as long as they follow
 these rules. Where the spec leaves a design decision open, pick something sensible and

@@ -1,11 +1,10 @@
 ---
 agent: agent
-description: CP08 - implement security roles (Lab 1)
+description: CP08 - implement security roles (Lab 3)
 ---
 
-Please implement the security roles in docs/design/lab-1-data-model-and-security.md
-(the Security roles section): Warehouse Manager and Warehouse Worker, using the TALXIS
-skills.
+Please implement the security roles in docs/design/lab-3-security.md:
+Warehouse manager and Warehouse worker, using the TALXIS skills.
 
 Work under src/ and the solution file. Name the projects however you like, but keep
 the role names and the table names exactly as the spec has them.
