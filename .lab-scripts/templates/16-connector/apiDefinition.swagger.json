@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Open Food Facts",
-    "description": "Look up product data (name, brand, quantity, image) by barcode from the Open Food Facts public database. No API key required.",
+    "description": "Look up product data by barcode from the Open Food Facts public database.",
     "version": "1.0"
   },
   "host": "world.openfoodfacts.org",
