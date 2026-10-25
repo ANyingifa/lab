@@ -12,7 +12,8 @@ Work under src/ and the solution file. Name the projects however you like, but k
 the table, column and choice names exactly as the spec has them.
 
 Do it in the order the spec lists the parts, and make sure each one works before
-starting the next.
+starting the next. The Product table has to be live in the Dev environment before the
+code app can bind to it, so check that it's deployed before you start wiring the app.
 
 If you get stuck, .lab-scripts/CP11-integrate-external-data.ps1 does this same step
 and is a good example to read.

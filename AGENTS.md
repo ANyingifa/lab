@@ -13,7 +13,5 @@ A hands-on Power Platform ALM lab: attendees run the checkpoint scripts in `.lab
 - Read `.lab-scripts/` as working examples, but don't edit it.
 - Use the `txc` discovery commands to scaffold, not `dotnet new`.
 - Ignore the build warning that PDPackage targets aren't verified against the .NET SDK.
-- Don't run `txc env sln import` in this lab (it fails with `Build output directory not
-  found`). Use `dotnet build`.
 - If `pac` reports `No such file or directory` in the first couple of minutes, the tools are
   still updating: wait a minute and retry.
