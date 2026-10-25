@@ -18,10 +18,10 @@ Neither interface decides whether a stock movement is allowed. That is the serve
 | Fixed: must match this specification | Open: left to the design |
 |---|---|
 | App, sitemap, view and web resource names | Form layout, tabs, sections and field order |
-| Form script and ribbon behaviour, including message text | Colours, typography and component library |
+| Form script and ribbon behaviour, including message text | Colours and typography. Component library (the starter's Fluent UI and TALXIS base controls are the default) |
 | Grid customization behaviour | Additional views, charts and dashboards |
 | Code app name, data sources and the outcomes in the user stories | Code app layout, navigation style and extra screens |
-| The test-hook contract (test ids and element ids) | How each hooked element looks |
+| The test-hook contract (test ids and element ids), where specification 5's browser scenarios run | How each hooked element looks |
 
 The browser scenarios in specification 5 exercise only the fixed parts. Any design that satisfies the user stories and passes those scenarios is acceptable.
 
@@ -210,7 +210,7 @@ The low-stock highlight colour is `#FDE7E9`. Group headers and empty cells are n
 |---|---|
 | Project | `src/Apps.WarehousePicking`, in `WarehouseManagement.slnx`, referenced by `Solutions.UI` |
 | App | Display name **Warehouse Picking**, app name `warehousepicking` |
-| Stack | Vite, React, TypeScript, Power Apps SDK (`@microsoft/power-apps`) |
+| Stack | Vite, React, TypeScript, Power Apps SDK (`@microsoft/power-apps`). Start from the `pp-app-code` starter, which brings Fluent UI v9 and the TALXIS base controls; use them for lists and form fields |
 | Data sources | `lab_warehouseitem`, `lab_warehousetransaction`, `lab_warehouselocation`, through generated typed services (for example `Lab_warehouseitemsService`) |
 | Local development | `npm run dev` → `http://localhost:5173` |
 
@@ -220,8 +220,11 @@ Rules that apply to every screen:
 - The only client-side validation is that required fields are filled. No stock comparison happens in the app.
 - A transaction created from an item's screen saves `lab_name`, `lab_quantity`, `lab_transactiontype`, `lab_transactiondate` (now) and binds `lab_itemid` to that item.
 - Server errors are shown to the user with the server's message unchanged.
+- Extra screens (for example a home screen with quick actions, or a stock count) are allowed. They follow these same rules and write through the same services, so the server still decides every stock movement.
 
 ### Test-hook contract
+
+These hooks are required where specification 5's browser scenarios run. They don't depend on the component library: whatever controls the app uses, each hook sits on the element described, and the option list opens as `role=option` entries.
 
 | Hook | Where | Purpose |
 |---|---|---|
