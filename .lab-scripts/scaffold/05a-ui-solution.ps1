@@ -73,9 +73,10 @@ if (-not (Get-LabValue 'uiSolutionScaffolded')) {
     txc workspace component create pp-app-model `
         --output "src/Solutions.UI" `
         --param "PublisherPrefix=$PublisherPrefix" `
-        --param "LogicalName=warehouseapp"
+        --param "LogicalName=warehouseapp" `
+        --param "DisplayName=Warehouse Management"
 
-    Write-Host "  ✓ App: warehouseapp" -ForegroundColor Green
+    Write-Host "  ✓ App: Warehouse Management" -ForegroundColor Green
 
     # ──────────────────────────────────────────────────────────────────────────────────────
     #                                  App Components
