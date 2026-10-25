@@ -41,7 +41,7 @@ $Global:LabCheckpoints = @(
     @{ Id = "cp06"; Keys = @("packageDeployerScaffolded", "dataModelScaffolded", "columnsScaffolded") }
     @{ Id = "cp07"; Keys = @("pluginsScaffolded", "logicSolutionScaffolded") }
     @{ Id = "cp08"; Keys = @("securityScaffolded") }
-    @{ Id = "cp09"; Keys = @("uiSolutionScaffolded", "sitemapScaffolded", "formsScaffolded", "viewsSubgridsScaffolded", "formScriptsScaffolded", "ribbonScaffolded", "gridControlScaffolded") }
+    @{ Id = "cp09"; Keys = @("uiSolutionScaffolded", "sitemapScaffolded", "formsScaffolded", "viewsSubgridsScaffolded", "codeAppScaffolded", "formScriptsScaffolded", "ribbonScaffolded", "gridControlScaffolded") }
     @{ Id = "cp10"; Keys = @() }
     @{ Id = "cp11"; Keys = @($cp11Steps | ForEach-Object { $_ }); Steps = $cp11Steps }
     @{ Id = "cp12"; Keys = @("configDataDirectory", "configDataSchemaPath", "configDataFilePath") }
