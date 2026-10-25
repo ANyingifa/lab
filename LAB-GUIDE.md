@@ -2,36 +2,38 @@
 
 You'll build a **Warehouse Management** app on Power Platform: tables, server-side rules, security roles, an app for managers, an app for floor workers, and a barcode lookup. Everything is source code in your own copy of this repository, and every change reaches `main` through a pull request.
 
+You do it all by talking to **Copilot Chat**.
+
 ## How the lab works
 
-You move forward in **checkpoints**. There are two kinds:
+You move forward in **checkpoints**. Copilot does the work in two ways:
 
-- **Scripts** set up the project and its pipelines. You run one in the terminal and read what it did.
-- **The agent** builds the app. You tell Copilot Chat which part to build, it reads the spec and does the work, and you review the result.
+- **Setup checkpoints** run a script that sets up the project and its pipelines. You ask Copilot to run it, and it tells you what happened.
+- **Build checkpoints** have Copilot build part of the app from a spec. You type a command like `/cp06-data-model`, and it reads the spec and does the work.
 
 Every checkpoint ends the same way: a **pull request** on your fork that you review and merge.
 
-| Checkpoint | Who does it | What you get |
+| Checkpoint | Type | What you get |
 |---|---|---|
-| CP01 | Script | Tools checked, you're signed in to everything |
-| CP02 | Script | The repository layout |
-| CP03 | Script | `main` protected: changes only through pull requests |
-| CP04 | Script | Your Dev and Test environments |
-| CP05 | Script | A pipeline that deploys to Test |
-| CP06 | Agent | The data model |
-| CP07 | Agent | The stock rules (plugins) |
-| CP08 | Agent | The security roles |
-| CP09 | Agent | The manager app and the worker app |
-| CP10 | Script | Your app running in Dev, and a change pulled back to source |
-| CP11 | Agent | Barcode lookup with external data |
-| CP12 | Agent | Reference data that travels with the app |
-| CP13 | Script | The build check becomes required on pull requests |
+| CP01 | Setup | Tools checked, you're signed in to everything |
+| CP02 | Setup | The repository layout |
+| CP03 | Setup | `main` protected: changes only through pull requests |
+| CP04 | Setup | Your Dev and Test environments |
+| CP05 | Setup | A pipeline that deploys to Test |
+| CP06 | Build | The data model |
+| CP07 | Build | The stock rules (plugins) |
+| CP08 | Build | The security roles |
+| CP09 | Build | The manager app and the worker app |
+| CP10 | Setup | Your app running in Dev, and a change pulled back to source |
+| CP11 | Build | Barcode lookup with external data |
+| CP12 | Build | Reference data that travels with the app |
+| CP13 | Setup | The build check becomes required on pull requests |
 
 ## Your screen
 
 - **This guide**, on the left.
-- **Copilot Chat**, on the right. You can ask it anything about the lab.
-- **The terminal**, at the bottom. Open it with **Ctrl+`** if you don't see it. It runs PowerShell.
+- **Copilot Chat**, on the right. This is where you do the lab.
+- **The terminal**, at the bottom (**Ctrl+`** shows it). You only need it if Copilot asks you to use it, or as a backup.
 - **The specs** are in `docs/design/`. Each one opens as a readable page.
 
 ## Before you start
@@ -40,41 +42,41 @@ Every checkpoint ends the same way: a **pull request** on your fork that you rev
 - You'll sign in to GitHub, Power Platform, Azure and Power Apps. **Use the same Microsoft account for the last three.** It needs to be able to create a Power Platform environment.
 - When the Codespace opens, its tools are still updating. **Wait until the terminal goes quiet** (about a minute) before you start.
 
+### Check that Copilot has its skills
+
+Copilot builds the app with the TALXIS skills. Ask it:
+
+> Hey Copilot, which skills are loaded and available?
+
+You should see TALXIS skills such as data-model, backend, security, frontend and deploy. If you don't, tell a facilitator before you go on.
+
 ## Part 1: Set up the project
 
-Run each script from the terminal, one after the other.
+Ask Copilot to run each setup checkpoint, one after the other. For example:
 
-```powershell
-.lab-scripts/CP01-check-machine-setup.ps1
-```
+> Run checkpoint 1 and sign me in.
 
-**CP01** checks the tools and signs you in. It shows a link and a code for each service: open the link, enter the code and approve. When GitHub asks, allow the `workflow` permission.
+or, later, just *What's next?* or *Run the next checkpoint.* Copilot finds the next one and runs it.
 
-```powershell
-.lab-scripts/CP02-create-repository-layout.ps1
-.lab-scripts/CP03-setup-continuous-integration.ps1
-.lab-scripts/CP04-setup-runtime.ps1
-.lab-scripts/CP05-setup-continuous-deployment.ps1
-```
-
+- **CP01** checks the tools and signs you in. Copilot walks you through it one service at a time: it gives you a link and a code, you open the link, enter the code and approve, and it moves on to the next. When GitHub asks, allow the `workflow` permission.
 - **CP02** creates the solution file and the `src/` folder.
 - **CP03** blocks direct pushes to `main`.
 - **CP04** creates your Dev and Test environments. It takes a few minutes.
 - **CP05** creates the deployment identity and the build and deploy workflows. The build check on its pull request will probably show a red ✗. That's expected: the project it builds is added in CP06. You can still merge.
 
-**Each script ends with a pull request link.** Open it and click **Files changed** to see what the script did. Then go back to the terminal and press **Enter**: the script merges the pull request for you.
+**Each checkpoint ends with a pull request link.** Open it and click **Files changed** to see what changed. Then click **Merge pull request** and **Confirm merge**, and come back here. Copilot carries on by itself.
 
-## Part 2: Build the app with the agent
+If Copilot tells you it's waiting for **Enter** in the terminal, click into the terminal, check the pull request, and press **Enter** yourself. Copilot never merges for you.
 
-From here the agent does the building. For each step:
+## Part 2: Build the app
+
+For each build checkpoint:
 
 1. **Read the spec** if you want to know what's coming. It's linked in the table below.
 2. **Type the command in Copilot Chat.** Start typing `/cp` and pick it from the list.
-3. **Let the agent work.** It builds the project, fixes build errors, and tells you what it chose where the spec left a decision open.
-4. **When it's done, it opens a pull request and waits.** It gives you the link. Open it and look at **Files changed**. Then click **Merge pull request** and **Confirm merge**, and come back here. The agent carries on by itself.
+3. **Let Copilot work.** It builds the project, fixes build errors, and tells you what it chose where the spec left a decision open.
+4. **When it's done, it opens a pull request and waits.** Review and merge it as above. Copilot carries on.
 5. Run the next command.
-
-The agent never merges for you.
 
 | Command | Spec | You get |
 |---|---|---|
@@ -88,11 +90,9 @@ Run `/cp09a-model-driven-app` first. It doesn't save; `/cp09b-code-app` does.
 
 ## Part 3: See it running
 
-```powershell
-.lab-scripts/CP10-deploy-and-sync.ps1
-```
+> Run checkpoint 10.
 
-**CP10** deploys the app to your Dev environment and gives you a link to open it. It then asks you to change a security role in the browser (it tells you how), and pulls that change back into source. Press **Enter** when you've made the change.
+**CP10** deploys the app to your Dev environment and pulls the result back into source. Copilot gives you the link to open your app in Dev.
 
 ## Part 4: External data and reference data
 
@@ -101,34 +101,33 @@ Run `/cp09a-model-driven-app` first. It doesn't save; `/cp09b-code-app` does.
 | `/cp11-external-data` | [Lab 5](docs/design/lab-5-external-data-and-background-processing.md) | A Product table, the Open Food Facts connector, and a barcode scan in the picking app |
 | `/cp12-config-data` | [Lab 1](docs/design/lab-1-data-model.md) | Locations and items that every environment starts with |
 
-`/cp11-external-data` opens **four** pull requests, one after each part. Merge each one before the agent starts the next.
+`/cp11-external-data` opens **four** pull requests, one after each part. Merge each one before Copilot starts the next.
 
 ## Part 5: Protect `main`
 
-```powershell
-.lab-scripts/CP13-extend-branch-policies-build-checks.ps1
-```
+> Run checkpoint 13.
 
 **CP13** makes the build check required. From now on a pull request can only merge after its build shows a green ✓.
 
-## If the agent gets stuck
+## If Copilot gets stuck
 
 1. Ask it what failed and to fix it. Most build errors it can fix itself.
 2. Compare what it did with the spec section its command names.
-3. Still stuck? **Run the checkpoint's script instead.** Scripts are safe to run again. First set the agent's half-finished work aside, so it doesn't get in the way:
+3. Still stuck? **Ask Copilot to run the checkpoint's script instead.** Scripts are safe to run again. First set the half-finished work aside, so it doesn't get in the way:
 
    ```powershell
    git stash -u
    ```
 
-   Then run the script for that checkpoint (for example `.lab-scripts/CP06-implement-data-model.ps1`). You can get the stashed work back with `git stash pop`.
+   Then ask Copilot to run that checkpoint (for example *Run checkpoint 6*). You can get the stashed work back with `git stash pop`.
 
 ## If something looks wrong
 
 | What you see | What to do |
 |---|---|
-| You're not sure where you are | Run `.lab-scripts/lab-status.ps1`. It says what's done and what's next |
-| Sign-in errors, or a new Codespace | Run `.lab-scripts/lab-signin.ps1`, or ask Chat to *sign me in* |
+| You're not sure where you are | Ask *Where am I in the lab?* It runs `lab-status` and tells you |
+| Sign-in errors, or a new Codespace | Ask *Sign me in* |
+| Copilot says it can't run something | Run the script yourself in the terminal, for example `.lab-scripts/CP02-create-repository-layout.ps1`, and press **Enter** when it asks you to merge |
 | Strange characters appear in the terminal | Close that terminal (the trash-can icon) and open a new one with **Ctrl+`**. Your progress is saved |
 | A pull request's build check is red ✗ before CP13 | You can still merge. After CP13, the merge waits for a green ✓ |
 | CP04 can't create an environment | Your account may not be allowed to. Ask a facilitator |
