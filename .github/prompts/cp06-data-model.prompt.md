@@ -7,7 +7,8 @@ Please implement the data model in docs/design/lab-1-data-model.md
 (the Data dictionary section): the Location, Item and Transaction tables with all
 their columns, using the TALXIS skills.
 
-Work under src/ and the solution file. Name the projects however you like, but keep
+Work under src/ and the solution file. Use the project names from the project table in docs/design/00-solution-architecture.md,
+because the build and deploy steps look for them, and keep
 the table, column and choice names exactly as the spec has them, because later
 checkpoints read them by name.
 

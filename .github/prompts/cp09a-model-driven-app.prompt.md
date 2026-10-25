@@ -9,7 +9,8 @@ specification sections "Solution and model-driven app", "Script library" and "TA
 on the Location form": the UI solution, the model-driven app with its sitemap, the forms,
 views and subgrids, the form and ribbon scripts, and the TALXIS Grid on the Location form.
 
-Work under src/ and the solution file. Name the projects however you like, but keep the
+Work under src/ and the solution file. Use the project names from the project table in docs/design/00-solution-architecture.md,
+because the build and deploy steps look for them, and keep the
 table, column and choice names, and the app, sitemap, view and web resource names, exactly
 as the spec has them. The form script and ribbon messages need to match the spec's text.
 Where the spec leaves a design decision open, pick something sensible and tell me what

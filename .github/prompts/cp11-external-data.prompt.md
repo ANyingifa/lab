@@ -8,7 +8,8 @@ docs/design/lab-5-external-data-and-background-processing.md using the TALXIS sk
 the Product table, the Open Food Facts custom connector, wiring both into the
 Warehouse Picking code app, and the barcode scan.
 
-Work under src/ and the solution file. Name the projects however you like, but keep
+Work under src/ and the solution file. Use the project names from the project table in docs/design/00-solution-architecture.md,
+because the build and deploy steps look for them, and keep
 the table, column and choice names exactly as the spec has them.
 
 Do it in the order the spec lists the parts, and make sure each one works before

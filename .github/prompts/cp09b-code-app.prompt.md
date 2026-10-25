@@ -11,7 +11,8 @@ Start from the `pp-app-code` starter. It comes with Fluent UI and the TALXIS bas
 so use those for the lists, lookups and form fields. Then add the warehouse screens
 on top of it, and reference the app from the UI solution the previous prompt created.
 
-Work under src/ and the solution file. Name the projects however you like, but keep the
+Work under src/ and the solution file. Use the project names from the project table in docs/design/00-solution-architecture.md,
+because the build and deploy steps look for them, and keep the
 table, column and choice names, and the app name, exactly as the spec has them. A few rules
 from the spec matter here:
 - All data goes through the generated services, with no hand-written calls to Dataverse.

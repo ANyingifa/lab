@@ -7,7 +7,8 @@ Please implement the two plugin rules in
 docs/design/lab-2-server-side-business-logic.md, ValidateWarehouseTransactionPlugin
 and SubtractQuantityPlugin, using the TALXIS skills.
 
-Work under src/ and the solution file. Name the projects however you like, but keep
+Work under src/ and the solution file. Use the project names from the project table in docs/design/00-solution-architecture.md,
+because the build and deploy steps look for them, and keep
 the table, column and choice names exactly as the spec has them.
 
 Keep the plugin code in its own project, and register the steps in a separate logic
