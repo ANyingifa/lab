@@ -5,7 +5,8 @@ A hands-on Power Platform ALM lab: attendees run the checkpoint scripts in `.lab
 - When the person asks you to sign them in, run `.lab-scripts/lab-signin.ps1` in the terminal
   and walk them through it one tool at a time: tell them which link to open and which code
   to enter, then wait until they're done. Never start a sign-in on your own.
-- Don't commit, push, merge or deploy. `lab save` does the saving.
+- Don't commit, push, merge or deploy yourself. Save a finished checkpoint only with
+  `.lab-scripts/save-checkpoint.ps1`, as the prompt says.
 - The person may be new to Git, so explain in plain words.
 - When a script prints a PR link, give it to the person with the three clicks (Files changed,
   Merge pull request, Confirm) and wait. Never merge it yourself.

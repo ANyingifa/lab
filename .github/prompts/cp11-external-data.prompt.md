@@ -19,4 +19,14 @@ If you get stuck, .lab-scripts/CP11-integrate-external-data.ps1 does this same s
 and is a good example to read.
 
 When you're done, run `dotnet build WarehouseManagement.slnx` and fix anything it
-reports. It also builds the code app, which takes a couple of minutes. Then tell me to run `lab save`.
+reports. It also builds the code app, which takes a couple of minutes.
+Save the checkpoint after each part, not only at the end, with these messages:
+
+1. After the Product table and the Item lookup: `.lab-scripts/save-checkpoint.ps1 -Id cp11 -Message "Add Product table and Item lookup for external data integration"`
+2. After the Open Food Facts connector: `.lab-scripts/save-checkpoint.ps1 -Id cp11 -Message "Add Open Food Facts custom connector, deployed to Dev"`
+3. After wiring both into the code app: `.lab-scripts/save-checkpoint.ps1 -Id cp11 -Message "Wire the Product table and Open Food Facts connector into the code app"`
+4. After the barcode scan: `.lab-scripts/save-checkpoint.ps1 -Id cp11 -Message "Add barcode scan UI to the item detail page"`
+
+Each save opens its own pull request on the fork and waits. Give me the PR link and tell me to
+review it and merge it on GitHub (Files changed, Merge pull request, Confirm), then carry on with the
+next part. Don't merge it yourself.

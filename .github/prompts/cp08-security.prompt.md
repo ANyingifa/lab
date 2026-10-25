@@ -18,4 +18,9 @@ If you get stuck, .lab-scripts/CP08-implement-security.ps1 does this same step
 and is a good example to read.
 
 When you're done, run `dotnet build WarehouseManagement.slnx` and fix anything it
-reports. Then tell me to run `lab save`.
+reports. Then save the checkpoint:
+
+`.lab-scripts/save-checkpoint.ps1 -Id cp08 -Message "Add warehouse security roles and entity privileges"`
+
+It opens a pull request on the fork and waits. Give me the PR link and tell me to review it and
+merge it on GitHub (Files changed, Merge pull request, Confirm). Don't merge it yourself.
