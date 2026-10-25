@@ -69,15 +69,25 @@ if (-not (az ad sp show --id $appId --query id -o tsv 2>$null)) {
     az ad sp create --id $appId | Out-Null
 }
 
-# Step 3: Federated credential trusting main of this repo.
-$fedCredentialName = "github-main"
-$fed = @{ name=$fedCredentialName; issuer="https://token.actions.githubusercontent.com";
-          subject="repo:$repo`:ref:refs/heads/main"; audiences=@("api://AzureADTokenExchange") } | ConvertTo-Json
-$tmp = New-TemporaryFile; Set-Content $tmp $fed -Encoding UTF8
-if (-not (az ad app federated-credential list --id $appId --query "[?name=='$fedCredentialName'] | [0].name" -o tsv 2>$null)) {
-    az ad app federated-credential create --id $appId --parameters "@$tmp" 2>&1 | Out-Null
+# Step 3: Federated credential trusting this repo's main branch.
+# A workflow on main gets a token whose subject names this repo; Entra trusts tokens with exactly
+# this subject. GitHub repos created since July 2026 include the owner and repo IDs in it, so the
+# trust can't pass to another repo that later takes the same name.
+$ghRepo = gh api "repos/$repo" | ConvertFrom-Json
+if (-not $ghRepo.id) { Write-Err "Could not read repo $repo from GitHub"; exit 1 }
+$subject = "repo:$($ghRepo.owner.login)@$($ghRepo.owner.id)/$($ghRepo.name)@$($ghRepo.id):ref:refs/heads/main"
+
+$tmp = New-TemporaryFile
+@{ name="github-main"; issuer="https://token.actions.githubusercontent.com"; subject=$subject; audiences=@("api://AzureADTokenExchange") } |
+    ConvertTo-Json | Set-Content $tmp -Encoding UTF8
+if (az ad app federated-credential list --id $appId --query "[?name=='github-main'].name" -o tsv) {
+    az ad app federated-credential update --id $appId --federated-credential-id github-main --parameters "@$tmp" | Out-Null
+} else {
+    az ad app federated-credential create --id $appId --parameters "@$tmp" | Out-Null
 }
-Remove-Item $tmp; Write-Ok "Federated credential (repo:${repo}:ref:refs/heads/main)"
+if ($LASTEXITCODE -ne 0) { Write-Err "Could not register the federated credential"; exit 1 }
+Remove-Item $tmp
+Write-Ok "Federated credential: $subject"
 
 # Step 4: Add SP as application user with System Administrator role in Test env.
 # We use the Dataverse OData API directly (pac admin assign-user requires a pac
