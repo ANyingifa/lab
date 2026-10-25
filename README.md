@@ -1,4 +1,4 @@
-# TALXIS Lab: Agentic Power Platform Development
+# Lab: Agentic Power Platform Development
 Build a Power Platform app with AI agents, the TALXIS SDK and TALXIS components: a monorepo, ephemeral Dev/Test
 environments, trunk-based development, PR quality gates and GitHub Actions deployments.
 
