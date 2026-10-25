@@ -29,28 +29,21 @@ param(
 $ErrorActionPreference = "Stop"
 . "$PSScriptRoot/lib/Lab.Common.ps1"
 
-# The same keys lab-status.ps1 checks. CP11 lands in four steps, each with its own flags;
-# productTableDeployed and connectorDeployed are set by the imports into Dev that steps 1 and 2 do.
-$flags = @{
-    cp06 = @('packageDeployerScaffolded', 'dataModelScaffolded', 'columnsScaffolded')
-    cp07 = @('pluginsScaffolded', 'logicSolutionScaffolded')
-    cp08 = @('securityScaffolded')
-    cp09 = @('uiSolutionScaffolded', 'sitemapScaffolded', 'formsScaffolded', 'viewsSubgridsScaffolded',
-             'formScriptsScaffolded', 'ribbonScaffolded', 'gridControlScaffolded')
-    cp11 = @{
-        1 = @('productTableScaffolded', 'productTableDeployed')
-        2 = @('connectorScaffolded', 'connectorDeployed')
-        3 = @('productDataSourceScaffolded', 'connectorDataSourceScaffolded')
-        4 = @('barcodeScanUiScaffolded')
-    }
+# The same keys lab-status.ps1 checks, from $LabCheckpoints in lib/Lab.Common.ps1. Only the
+# *Scaffolded flags are true/false; the other keys hold values a script looked up. CP11 lands
+# in four steps, each with its own flags.
+$checkpoint = $LabCheckpoints | Where-Object { $_.Id -eq $Id }
+if (-not $checkpoint) { Write-Err "Unknown checkpoint '$Id' - use cp06 to cp15."; exit 1 }
+$keys = $checkpoint.Keys
+if ($checkpoint.Steps) {
+    if ($Step -lt 1 -or $Step -gt $checkpoint.Steps.Count) { Write-Err "$Id saves in $($checkpoint.Steps.Count) steps: pass -Step 1 to $($checkpoint.Steps.Count)."; exit 1 }
+    $keys = $checkpoint.Steps[$Step - 1]
 }
+foreach ($key in $keys | Where-Object { $_ -like '*Scaffolded' }) { Set-LabValue $key $true }
 
-$keys = $flags[$Id]
-if ($Id -eq 'cp11') {
-    if ($Step -lt 1) { Write-Err "CP11 saves in four steps: pass -Step 1 to 4."; exit 1 }
-    $keys = $keys[$Step]
-}
-foreach ($key in $keys) { Set-LabValue $key $true }
+# Steps 1 and 2 of CP11 import into Dev, as the prompt says; the script then skips those imports.
+if ($Id -eq 'cp11' -and $Step -eq 1) { Set-LabValue 'productTableDeployed' $true }
+if ($Id -eq 'cp11' -and $Step -eq 2) { Set-LabValue 'connectorDeployed' $true }
 
 # CP12's flags hold the paths of the reference data package, not true/false.
 if ($Id -eq 'cp12') {
