@@ -6,5 +6,13 @@
   "publisherPrefix": "lab",
   "repo": "ANyingifa/lab",
   "mainRulesetId": 25828845,
-  "mainRulesetName": "lab-main-protection"
+  "mainRulesetName": "lab-main-protection",
+  "devEnvUrl": "https://wm-dev-7489.crm.dynamics.com",
+  "devEnvId": "d58b34fd-8d97-e56e-a7fc-062565b4e115",
+  "devOrgId": "2475fa9d-98d0-f111-be88-7ced8d71460b",
+  "devProfile": "dev",
+  "testEnvUrl": "https://wm-test-7489.crm.dynamics.com",
+  "testEnvId": "245b9c7d-6bd6-e43b-bbb2-1015bbf9071a",
+  "testOrgId": "4553b67e-98d0-f111-a04e-6045bd003130",
+  "testProfile": "test"
 }
