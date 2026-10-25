@@ -18,7 +18,13 @@ If you get stuck, .lab-scripts/CP12-move-configuration.ps1 does this same step
 and is a good example to read.
 
 When you're done, run `dotnet build WarehouseManagement.slnx` and fix anything it
-reports. Then save the checkpoint:
+reports. Then load the records into my Dev environment, so I can try the picking app with
+real data:
+
+`txc data pkg import src/Packages.Main/Data --profile dev`
+
+If the import fails, tell me what it said and wait. Don't retry it with other options.
+Then save the checkpoint:
 
 `.lab-scripts/save-checkpoint.ps1 -Id cp12 -Message "Add configuration data package for environment promotion"`
 

@@ -69,7 +69,7 @@ or, later, just *What's next?* or *Run the next checkpoint.* Copilot finds the n
 - **"I'll carry on when you've merged it":** click **Merge pull request** and **Confirm merge** on GitHub, then come back here. Copilot carries on by itself.
 - **"I'm waiting for Enter in the terminal":** don't merge on GitHub. Check the pull request, then click into the terminal and press **Enter**. The script merges it for you.
 
-Never do both, or the script keeps waiting for a pull request that's already merged. Copilot never merges for you.
+You only need one of the two. Copilot never merges for you.
 
 ## Part 2: Build the app
 
@@ -110,7 +110,7 @@ It deploys the app to your Dev environment and gives you a link to open it. It t
 
 `/cp11-external-data` opens **four** pull requests, one after each part. Merge each one before Copilot starts the next. It also imports the Product table and the connector into your Dev environment, which it tells you about.
 
-After `/cp12-config-data`, **try the picking app yourself**. In a second terminal:
+`/cp12-config-data` also loads the records into your Dev environment. After it, **try the picking app yourself**. In a second terminal:
 
 ```powershell
 cd src/Apps.WarehousePicking
@@ -128,6 +128,8 @@ Open the local link it prints and sign in. Then check two things:
 > Run checkpoint 13.
 
 **CP13** makes the build check required. From now on a pull request can only merge after its build shows a green ✓.
+
+That's the end of the guided lab. **Finished early?** CP14 and CP15 add automated tests: ask Copilot to run checkpoint 14, then 15. They're optional and not covered by this guide, and the CP14 browser tests expect the picking app the CP09 script builds, so they may fail against one Copilot built.
 
 ## If Copilot gets stuck
 

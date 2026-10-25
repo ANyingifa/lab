@@ -15,9 +15,9 @@ the table, column and choice names exactly as the spec has them.
 Do it in the order the spec lists the parts, and make sure each one works before
 starting the next.
 
-This is the one checkpoint where you deploy to my Dev environment, because the code app
-can only bind to the Product table and the connector once they're live there. Deploy
-only these two solutions, and only when the prompt says so:
+This checkpoint deploys to my Dev environment, because the code app can only bind to the
+Product table and the connector once they're live there. Deploy only these two solutions,
+and only when the prompt says so:
 - After part A builds: `txc env sln import src/Solutions.DataModel --wait --profile dev`
 - After part B builds: `txc env sln import src/Solutions.Connectors --wait --profile dev`
 If an import fails, tell me what it said and wait. Don't retry it with other options.
