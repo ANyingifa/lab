@@ -18,5 +18,5 @@ code app can bind to it, so check that it's deployed before you start wiring the
 If you get stuck, .lab-scripts/CP11-integrate-external-data.ps1 does this same step
 and is a good example to read.
 
-When you're done, run `.lab-scripts/lab-check.ps1 -Checkpoint cp11` and work through
-anything it reports. Once it passes, tell me to run `lab save`.
+When you're done, run `dotnet build WarehouseManagement.slnx` and fix anything it
+reports. It also builds the code app, which takes a couple of minutes. Then tell me to run `lab save`.
