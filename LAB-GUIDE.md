@@ -64,9 +64,12 @@ or, later, just *What's next?* or *Run the next checkpoint.* Copilot finds the n
 - **CP04** creates your Dev and Test environments. It takes a few minutes.
 - **CP05** creates the deployment identity and the build and deploy workflows. The build check on its pull request will probably show a red ✗. That's expected: the project it builds is added in CP06. You can still merge.
 
-**Each checkpoint ends with a pull request link.** Open it and click **Files changed** to see what changed. Then click **Merge pull request** and **Confirm merge**, and come back here. Copilot carries on by itself.
+**Each checkpoint ends with a pull request link.** Open it and click **Files changed** to see what changed. Then do **one** of these, depending on what Copilot says:
 
-If Copilot tells you it's waiting for **Enter** in the terminal, click into the terminal, check the pull request, and press **Enter** yourself. Copilot never merges for you.
+- **"I'll carry on when you've merged it":** click **Merge pull request** and **Confirm merge** on GitHub, then come back here. Copilot carries on by itself.
+- **"I'm waiting for Enter in the terminal":** don't merge on GitHub. Check the pull request, then click into the terminal and press **Enter**. The script merges it for you.
+
+Never do both, or the script keeps waiting for a pull request that's already merged. Copilot never merges for you.
 
 ## Part 2: Build the app
 
@@ -90,9 +93,13 @@ Run `/cp09a-model-driven-app` first. It doesn't save; `/cp09b-code-app` does.
 
 ## Part 3: See it running
 
-> Run checkpoint 10.
+**CP10** is the one checkpoint you run in the terminal yourself, because it waits for you to make a change in the browser:
 
-**CP10** deploys the app to your Dev environment and pulls the result back into source. Copilot gives you the link to open your app in Dev.
+```powershell
+.lab-scripts/CP10-deploy-and-sync.ps1
+```
+
+It deploys the app to your Dev environment and gives you a link to open it. It then shows you how to change a security role in the browser, and waits. Make the change, then press **Enter** in the terminal: the script pulls your change back into source. At the end of the checkpoint the pull request link appears. Review it and press **Enter** to merge, as in Part 1.
 
 ## Part 4: External data and reference data
 
@@ -101,7 +108,20 @@ Run `/cp09a-model-driven-app` first. It doesn't save; `/cp09b-code-app` does.
 | `/cp11-external-data` | [Lab 5](docs/design/lab-5-external-data-and-background-processing.md) | A Product table, the Open Food Facts connector, and a barcode scan in the picking app |
 | `/cp12-config-data` | [Lab 1](docs/design/lab-1-data-model.md) | Locations and items that every environment starts with |
 
-`/cp11-external-data` opens **four** pull requests, one after each part. Merge each one before Copilot starts the next.
+`/cp11-external-data` opens **four** pull requests, one after each part. Merge each one before Copilot starts the next. It also imports the Product table and the connector into your Dev environment, which it tells you about.
+
+After `/cp12-config-data`, **try the picking app yourself**. In a second terminal:
+
+```powershell
+cd src/Apps.WarehousePicking
+npm install
+npm run dev
+```
+
+Open the local link it prints and sign in. Then check two things:
+
+1. Open **Office Laptop** (100 on hand) and create an **Outbound** transaction for a small quantity. It succeeds and the quantity on hand goes down.
+2. Try to pick more than 5 of **Wireless Mouse** (5 on hand). The server refuses it and the app shows the error.
 
 ## Part 5: Protect `main`
 
@@ -127,7 +147,7 @@ Run `/cp09a-model-driven-app` first. It doesn't save; `/cp09b-code-app` does.
 |---|---|
 | You're not sure where you are | Ask *Where am I in the lab?* It runs `lab-status` and tells you |
 | Sign-in errors, or a new Codespace | Ask *Sign me in* |
-| Copilot says it can't run something | Run the script yourself in the terminal, for example `.lab-scripts/CP02-create-repository-layout.ps1`, and press **Enter** when it asks you to merge |
+| Copilot says it can't run something | Run the script yourself in the terminal, for example `.lab-scripts/CP02-create-repository-layout.ps1`. When it asks you to press **Enter** to merge, check the pull request first, and don't also merge it on GitHub |
 | Strange characters appear in the terminal | Close that terminal (the trash-can icon) and open a new one with **Ctrl+`**. Your progress is saved |
 | A pull request's build check is red ✗ before CP13 | You can still merge. After CP13, the merge waits for a green ✓ |
 | CP04 can't create an environment | Your account may not be allowed to. Ask a facilitator |
