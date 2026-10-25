@@ -137,7 +137,7 @@ flowchart LR
     UI["Solutions.UI<br/>app, forms, views"]
     DATA["Data/<br/>reference data"]
   end
-  PW["Plugins.Warehouse<br/>C#, net462"] --> LG
+  PW["Plugins.Warehouse<br/>C#, net472"] --> LG
   SU["Scripts.UI<br/>TypeScript → lab_main.js"] --> UI
   CA["Apps.WarehousePicking<br/>code app"] --> UI
   subgraph conn["Solutions.Connectors (deployed on its own)"]
@@ -151,7 +151,7 @@ flowchart LR
 | `Packages.Main` | Package Deployer package (`.pdpkg.zip`) | 1 | Deploys everything below except connectors |
 | `Solutions.DataModel` | Solution | 1 | Owns every table definition |
 | `Solutions.Security` | Solution | 3 | Security roles |
-| `Plugins.Warehouse` | Plugin assembly (.NET Framework 4.6.2) | 2 | Referenced by `Solutions.Logic` |
+| `Plugins.Warehouse` | Plugin assembly (.NET Framework 4.7.2) | 2 | Referenced by `Solutions.Logic` |
 | `Solutions.Logic` | Solution | 2, 5 | Plugin assembly and steps; the cloud flow |
 | `Solutions.UI` | Solution | 4 | References the tables; app, forms, views, ribbon |
 | `Scripts.UI` | Script library → web resource `lab_main.js` | 4 | Referenced by `Solutions.UI` |

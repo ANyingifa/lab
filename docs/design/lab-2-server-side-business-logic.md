@@ -13,7 +13,7 @@ Dataverse enforces two stock rules whenever a Warehouse Transaction is **created
 
 | Project | Kind | Relationships |
 |---|---|---|
-| `src/Plugins.Warehouse` | Signed plugin assembly, .NET Framework 4.6.2 | Included in `WarehouseManagement.slnx` |
+| `src/Plugins.Warehouse` | Signed plugin assembly, .NET Framework 4.7.2 | Included in `WarehouseManagement.slnx` |
 | `src/Solutions.Logic` | Solution (publisher `TALXISLab`, prefix `lab`) | References `Plugins.Warehouse`; referenced by `Packages.Main` |
 
 `Solutions.Logic` contains the plugin assembly registration and two processing steps. Both plugin classes are in namespace `Plugins.Warehouse`, derive from a shared `PluginBase`, accept the standard `(string unsecureConfiguration, string secureConfiguration)` constructor, and implement `ExecuteDataversePlugin(ILocalPluginContext)`.
