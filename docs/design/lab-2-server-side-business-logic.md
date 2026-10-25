@@ -1,6 +1,6 @@
 # Lab 2: Server-Side Business Logic
 
-Depends on [specification 1](lab-1-data-model-and-security.md).
+Depends on [specification 1](lab-1-data-model.md).
 
 ## Scope
 
@@ -29,7 +29,7 @@ Dataverse enforces two stock rules whenever a Warehouse Transaction is **created
 | Mode | Synchronous | Synchronous |
 | Filtering attributes, images, configuration | None | None |
 
-Neither step is registered on Update or Delete. Later changes to a transaction, such as marking it processed (specification 4), never move stock.
+Neither step is registered on Update or Delete. Later changes to a transaction, such as marking it processed (specification 5), never move stock.
 
 ## Rule 1: ValidateWarehouseTransactionPlugin
 

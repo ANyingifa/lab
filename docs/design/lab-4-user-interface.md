@@ -1,6 +1,6 @@
-# Lab 3: User Interface
+# Lab 4: User Interface
 
-Depends on specifications [1](lab-1-data-model-and-security.md) and [2](lab-2-server-side-business-logic.md).
+Depends on specifications [1](lab-1-data-model.md), [2](lab-2-server-side-business-logic.md) and [3](lab-3-security.md).
 
 ## Scope
 
@@ -21,9 +21,8 @@ Neither interface decides whether a stock movement is allowed. That is the serve
 | Form script and ribbon behaviour, including message text | Colours and typography. Component library (the starter's Fluent UI and TALXIS base controls are the default) |
 | Grid customization behaviour | Additional views, charts and dashboards |
 | Code app name, data sources and the outcomes in the user stories | Code app layout, navigation style and extra screens |
-| The test-hook contract (test ids and element ids), where specification 5's browser scenarios run | How each hooked element looks |
 
-The browser scenarios in specification 5 exercise only the fixed parts. Any design that satisfies the user stories and passes those scenarios is acceptable.
+Any design that satisfies the user stories is acceptable.
 
 ## User stories: Warehouse app (manager)
 
@@ -221,21 +220,6 @@ Rules that apply to every screen:
 - A transaction created from an item's screen saves `lab_name`, `lab_quantity`, `lab_transactiontype`, `lab_transactiondate` (now) and binds `lab_itemid` to that item.
 - Server errors are shown to the user with the server's message unchanged.
 - Extra screens (for example a home screen with quick actions, or a stock count) are allowed. They follow these same rules and write through the same services, so the server still decides every stock movement.
-
-### Test-hook contract
-
-These hooks are required where specification 5's browser scenarios run. They don't depend on the component library: whatever controls the app uses, each hook sits on the element described, and the option list opens as `role=option` entries.
-
-| Hook | Where | Purpose |
-|---|---|---|
-| `data-testid="warehouse-item-row"` | One per item on the items list; contains the item name and a link to its detail | Find and open an item |
-| `data-testid="item-detail-qty"` | Item detail | Quantity on hand as a plain integer, nothing else |
-| `data-testid="new-transaction-button"` | Item detail | Opens the new transaction form |
-| `id="txName"`, `id="txQuantity"` | Inputs in that form | Name and quantity |
-| `data-testid="tx-type-trigger"` | Type selector in that form | Opens options with `role=option` named **Inbound** and **Outbound** |
-| `data-testid="submit-transaction"` | That form | Saves |
-
-Specification 4 adds hooks for the barcode scan.
 
 ## Acceptance criteria
 
